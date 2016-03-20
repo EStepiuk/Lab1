@@ -10,6 +10,7 @@ class MatchResult:
 
     def get_date(self):
         return self.date
+
     def get_result(self, ):
         return self.result
 
@@ -20,12 +21,9 @@ class MatchResult:
         return self.second_T
 
 
-England = [MatchResult('Lester', 'Everton', '2:0','03.18.16'),
-           MatchResult('MU', 'Everton', '3:0','03.16.16'),
-           MatchResult('Chelsea', 'Arsenal', '2:1','03.18.16'),
-           MatchResult('MU', 'Chelsea', '0:0','03.20.16'),
-           MatchResult('Arsenal', 'Lester', '1:1','03.22.16'),
-           MatchResult('Arsenal', 'Chelsea', '3:0','03.25.16')]
-
-
-
+England = [MatchResult('Lester', 'Everton', '2:0', '03.18.16'),
+           MatchResult('MU', 'Everton', '3:0', '03.16.16'),
+           MatchResult('Chelsea', 'Arsenal', '2:1', '03.18.16'),
+           MatchResult('MU', 'Chelsea', '0:0', '03.20.16'),
+           MatchResult('Arsenal', 'Lester', '1:1', '03.22.16'),
+           MatchResult('Arsenal', 'Chelsea', '3:0', '03.25.16')]
