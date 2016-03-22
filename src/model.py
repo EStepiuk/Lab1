@@ -27,3 +27,12 @@ England = [MatchResult('Lester', 'Everton', '2:0', '03.18.16'),
            MatchResult('MU', 'Chelsea', '0:0', '03.20.16'),
            MatchResult('Arsenal', 'Lester', '1:1', '03.22.16'),
            MatchResult('Arsenal', 'Chelsea', '3:0', '03.25.16')]
+
+
+def get_by_team(team):
+    results = []
+    for t in England:
+        if t.get_first() == team or t.get_second() == team:
+            results.append(t)
+    return results
+
