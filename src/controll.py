@@ -2,7 +2,9 @@ __author__ = 'Stepiuk'
 from os import system
 import model
 import view
-import getch
+
+
+# import getch
 
 
 def main_loop():
@@ -10,7 +12,7 @@ def main_loop():
     Main lifecycle
     :return:
     """
-    system("clear")
+    # system("clear")
     for t in model.England:
         view.render_item(t.get_first(), t.get_second(), t.get_result(), t.get_date())
     view.render_menu()
@@ -26,14 +28,15 @@ def user_interaction_handler():
     space -> full table
     :return:
     """
-    c = getch.getch()
-    system("clear")
+    c = raw_input()
+    # system("clear")
     if c == ' ':
         for t in model.England:
             view.render_item(t.get_first(), t.get_second(), t.get_result(), t.get_date())
     elif c == 'e':
         exit(0)
     elif c == 's':
+        view.render_action()
         items = model.get_by_team(raw_input())
         for i in items:
             view.render_item(i.get_first(), i.get_second(), i.get_result(), i.get_date())
