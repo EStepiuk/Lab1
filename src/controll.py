@@ -43,4 +43,4 @@ def user_interaction_handler():
     view.render_menu()
 
 
-main_loop()
+# main_loop()
