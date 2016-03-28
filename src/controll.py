@@ -1,14 +1,14 @@
 __author__ = 'Stepiuk'
 from os import system
-import model
+from model import Model
 import view
 import getch
 
-
 user_input = None
+model = Model()
 
 
-def render(items=model.England):
+def render(items=model):
     """
     Render given items
     and user menu
@@ -17,7 +17,7 @@ def render(items=model.England):
     """
     system("clear")
     for i in items:
-            view.render_item(i.get_first(), i.get_second(), i.get_result(), i.get_date())
+        view.render_item(i.get_first(), i.get_second(), i.get_result(), i.get_date())
     view.render_menu()
 
 
@@ -28,12 +28,15 @@ def notify(observer):
     :param observer: observer to notify
     :return:
     """
+
     def decorator(f):
         def wrapper(*args):
             res = f(*args)
             observer()
             return res
+
         return wrapper
+
     return decorator
 
 
@@ -50,7 +53,7 @@ def user_action_handler():
     elif user_input == 'e':
         exit(0)
     elif user_input == 's':
-        render(model.get_by_team(raw_input()))
+        render(model.get_by_team(input()))
 
 
 @notify(user_action_handler)

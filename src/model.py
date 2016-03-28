@@ -1,67 +1,52 @@
 __author__ = 'Kryvonis'
 
 
-class MatchResult:
+class Model:
     """
-    Object means matchrResult
+    Object means gameResult
     """
 
-    def __init__(self, first_T, second_T, result, date):
+    def __init__(self):
         """
-        main constructor
-        :param first_T:
-        :param second_T:
-        :param result:
-        :param date:
+        Initialize standart data
         :return:
         """
-        self.date = date
-        self.result = result
-        self.first_T = first_T
-        self.second_T = second_T
+        self.England = []
+        self.add_result('Lester', 'Everton', '2:0', '03.18.16')
+        self.add_result('MU', 'Everton', '3:0', '03.16.16')
+        self.add_result('Chelsea', 'Arsenal', '2:1', '03.18.16')
+        self.add_result('MU', 'Chelsea', '0:0', '03.20.16')
+        self.add_result('Arsenal', 'Lester', '1:1', '03.22.16')
+        self.add_result('Arsenal', 'Chelsea', '3:0', '03.25.16')
 
-    def get_date(self):
+    def add_result(self, first_T, second_T, result, date):
         """
-        :return self.date:
+        Add one gameResult in England league
+        :param first_T: first team name
+        :param second_T: second team name
+        :param result: game result
+        :param date: date of game
+        :return: null
         """
-        return self.date
+        self.England.append((first_T, second_T, result, date))
 
-    def get_result(self, ):
+    def get_by_team(self, team):
         """
-        :return self.resutl:
+        Find all game width one team
+        :param team: name of team
+        :return: result array of all games
         """
-        return self.result
+        results = []
+        for game in self.England:
+            if team in game:
+                results.append(game)
+        return results
 
-    def get_first(self):
+    def get_all_games(self):
         """
-        :return self.first_team:
+        Get all England league games
+        :return: array of all games
         """
-        return self.first_T
+        return self.England
 
-    def get_second(self):
-        """
-
-        :return self.second_team:
-        """
-        return self.second_T
-
-
-England = [MatchResult('Lester', 'Everton', '2:0', '03.18.16'),
-           MatchResult('MU', 'Everton', '3:0', '03.16.16'),
-           MatchResult('Chelsea', 'Arsenal', '2:1', '03.18.16'),
-           MatchResult('MU', 'Chelsea', '0:0', '03.20.16'),
-           MatchResult('Arsenal', 'Lester', '1:1', '03.22.16'),
-           MatchResult('Arsenal', 'Chelsea', '3:0', '03.25.16')]
-
-
-def get_by_team(team):
-    """
-    Return list of team what we want to find
-    :param team:
-    :return result:
-    """
-    results = []
-    for t in England:
-        if t.get_first() == team or t.get_second() == team:
-            results.append(t)
-    return results
+        # def get_first_team(self,match):

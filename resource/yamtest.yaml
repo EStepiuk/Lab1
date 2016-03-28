@@ -1,0 +1,8 @@
+!!python/object:model.Model
+England:
+- !!python/tuple [Lester, Everton, '2:0', 03.18.16]
+- !!python/tuple [MU, Everton, '3:0', 03.16.16]
+- !!python/tuple [Chelsea, Arsenal, '2:1', 03.18.16]
+- !!python/tuple [MU, Chelsea, '0:0', 03.20.16]
+- !!python/tuple [Arsenal, Lester, '1:1', 03.22.16]
+- !!python/tuple [Arsenal, Chelsea, '3:0', 03.25.16]
