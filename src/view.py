@@ -10,8 +10,7 @@ def render_item(team1, team2, score, date):
     :param date:
     :return:
     """
-    print(date)
-    print(team1 + " vs " + team2 + "  " + score + "  " + date)
+    print("%s : %s vs %s | %s" % (date, team1, team2, score))
     return
 
 

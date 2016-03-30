@@ -8,7 +8,7 @@ user_input = None
 model = Model()
 
 
-def render(items=model):
+def render(items=model.get_all_games()):
     """
     Render given items
     and user menu
@@ -16,7 +16,7 @@ def render(items=model):
     :return:
     """
     system("clear")
-    for i in items.get_all_games():
+    for i in items:
         view.render_item(i[0],i[1],i[2],i[3])
     view.render_menu()
 
@@ -53,6 +53,7 @@ def user_action_handler():
     elif user_input == 'e':
         exit(0)
     elif user_input == 's':
+        view.render_action()
         render(model.get_by_team(input()))
 
 
