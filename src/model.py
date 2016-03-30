@@ -9,7 +9,7 @@ class Model:
     def __init__(self):
         """
         Initialize standart data
-        :return:
+        :return: null
         """
         self.England = []
         self.add_result('Lester', 'Everton', '2:0', '03.18.16')
@@ -49,4 +49,5 @@ class Model:
         """
         return self.England
 
-        # def get_first_team(self,match):
+    def get_team_items(self, match):
+        return match[0], match[1], match[2], match[3]

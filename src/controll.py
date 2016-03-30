@@ -16,8 +16,8 @@ def render(items=model):
     :return:
     """
     system("clear")
-    for i in items:
-        view.render_item(i.get_first(), i.get_second(), i.get_result(), i.get_date())
+    for i in items.get_all_games():
+        view.render_item(i[0],i[1],i[2],i[3])
     view.render_menu()
 
 
