@@ -1,17 +1,19 @@
 import unittest
 from model import Model
-import yaml
+
 
 class TestModel(unittest.TestCase):
     def test_create(self):
         model = Model()
-        with open('../res/yamtest.yaml','wt') as f:
-            yaml.dump(model,f)
+        self.assertIsNotNone(model.get_all_games());
 
-        with open('../res/yamtest.yaml','r') as f:
-            teet = yaml.load(f)
+    def test_add_result(self):
+        model1 = Model()
+        model2 = Model()
+        self.assertEqual(model1.get_all_games(), model2.get_all_games())
+        model2.add_result('test', 'test', 'test', 'test')
+        self.assertNotEqual(model1.get_all_games(), model2.get_all_games())
 
-        print(teet.get_by_team('MU'))
-        print(model.get_team_items(model.get_all_games()[0]))
-
-        self.assertEqual(model.get_by_team('MU'),teet.get_by_team('MU'))
+    def test_get_by_team(self):
+        model = Model()
+        self.assertIsNotNone(model.get_by_team('MU'))
