@@ -14,10 +14,6 @@ def render_item(team1, team2, score, date):
     return
 
 
-def render_action():
-    print("Now write name of team")
-
-
 def render_menu():
     """
     Write on screen menu
@@ -25,5 +21,6 @@ def render_menu():
     """
     print ("""            - Space to view all matches
             - E to exit
-            - S to search""")
+            - S to search
+            - A to add""")
     return

@@ -1,11 +1,18 @@
 __author__ = 'Stepiuk'
 from os import system
 from model import Model
+import sear_json
+import sear_pickle
+import sear_yaml
+import ConfigParser
 import view
 import getch
 
+
 user_input = None
 model = Model()
+config = ConfigParser.ConfigParser()
+backup_observers = []
 
 
 def render(items=model.get_all_games()):
@@ -17,7 +24,7 @@ def render(items=model.get_all_games()):
     """
     system("clear")
     for i in items:
-        view.render_item(i[0],i[1],i[2],i[3])
+        view.render_item(i[0], i[1], i[2], i[3])
     view.render_menu()
 
 
@@ -40,11 +47,38 @@ def notify(observer):
     return decorator
 
 
+def backup_observer():
+    for observer in backup_observers:
+        observer()
+
+
+def register(observer):
+    backup_observers.append(observer)
+
+
+def unregister(observer):
+    backup_observers.remove(observer)
+
+
+model.add_result = notify(backup_observer)(model.add_result)
+
+
+def configure():
+    config.read("../config.ini")
+    if config.getboolean("BackUp", "yaml"):
+        register(sear_yaml.write)
+    if config.getboolean("BackUp", "json"):
+        register(sear_json.write)
+    if config.getboolean("BackUp", "pickle"):
+        register(sear_pickle.write)
+
+
 def user_action_handler():
     """
     Handle user actions:
     e -> exit
     s -> search by team
+    a -> add result
     space -> full table
     :return:
     """
@@ -53,8 +87,11 @@ def user_action_handler():
     elif user_input == 'e':
         exit(0)
     elif user_input == 's':
-        view.render_action()
-        render(model.get_by_team(input()))
+        render(model.get_by_team(raw_input("Input team name: ")))
+    elif user_input == 'a':
+        model.add_result(raw_input("First team name: "), raw_input("Second team name: "),
+                         raw_input("Score in format g:g: "), raw_input("Date in format mm.dd.yy: "))
+        render()
 
 
 @notify(user_action_handler)
@@ -75,6 +112,7 @@ def main_loop():
     Main lifecycle
     :return:
     """
+    configure()
     render()
     while True:
         read_input(getch.getch())

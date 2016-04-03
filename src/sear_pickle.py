@@ -1,6 +1,8 @@
 import pickle
+from model import Model
 
-def write(obj, filename='../res/pickle_file.pickle'):
+
+def write(obj=Model().England, filename='../res/pickle_file.pickle'):
     with open(filename, 'wt') as f:
         pickle.dump(obj, f)
 

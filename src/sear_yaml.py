@@ -1,7 +1,8 @@
 import yaml
+from model import Model
 
 
-def write(obj, filename='../res/yam_file.yaml'):
+def write(obj=Model().England, filename='../res/yam_file.yaml'):
     with open(filename, 'wt') as f:
         yaml.dump(obj, f)
 
