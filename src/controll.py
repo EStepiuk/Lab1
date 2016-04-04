@@ -7,12 +7,13 @@ import sear_yaml
 import ConfigParser
 import view
 import getch
+import functools
 
 
 user_input = None
 model = Model()
 config = ConfigParser.ConfigParser()
-backup_observers = []
+backup_functions = []
 
 
 def render(items=model.get_all_games()):
@@ -47,24 +48,35 @@ def notify(observer):
     return decorator
 
 
-def backup_observer():
-    for observer in backup_observers:
-        observer()
+def backup_data():
+    for f in backup_functions:
+        f()
 
 
 def register(observer):
-    backup_observers.append(observer)
+    backup_functions.append(observer)
 
 
 def unregister(observer):
-    backup_observers.remove(observer)
+    backup_functions.remove(observer)
 
 
-model.add_result = notify(backup_observer)(model.add_result)
+model.add_result = notify(backup_data)(model.add_result)
+sear_yaml.write = functools.partial(sear_yaml.write, obj=model.England)
+sear_json.write = functools.partial(sear_json.write, obj=model.England)
+sear_pickle.write = functools.partial(sear_pickle.write, obj=model.England)
 
 
 def configure():
     config.read("../config.ini")
+    restore_from = config.get("Restore", "from")
+    if restore_from == "yaml":
+        model.copy(sear_yaml.read())
+    if restore_from == "json":
+        model.copy(sear_json.read())
+    if restore_from == "pickle":
+        model.copy(sear_pickle.read())
+
     if config.getboolean("BackUp", "yaml"):
         register(sear_yaml.write)
     if config.getboolean("BackUp", "json"):
@@ -116,6 +128,7 @@ def main_loop():
     render()
     while True:
         read_input(getch.getch())
+    backup_data()
 
 
 main_loop()

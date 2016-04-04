@@ -1,4 +1,5 @@
 __author__ = 'Kryvonis'
+from sear_yaml import read
 
 
 class Model(object):
@@ -13,12 +14,20 @@ class Model(object):
             :return: null
             """
             self.England = []
+            """
+
             self.add_result('Lester', 'Everton', '2:0', '03.18.16')
             self.add_result('MU', 'Everton', '3:0', '03.16.16')
             self.add_result('Chelsea', 'Arsenal', '2:1', '03.18.16')
             self.add_result('MU', 'Chelsea', '0:0', '03.20.16')
             self.add_result('Arsenal', 'Lester', '1:1', '03.22.16')
             self.add_result('Arsenal', 'Chelsea', '3:0', '03.25.16')
+            """
+
+        def copy(self, _from):
+            del self.England[:]
+            for i in _from:
+                self.add_result(i[0], i[1], i[2], i[3])
 
         def add_result(self, first_T, second_T, result, date):
             """
