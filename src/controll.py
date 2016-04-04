@@ -49,15 +49,29 @@ def notify(observer):
 
 
 def backup_data():
+    """
+    Runs functions from backup_functions
+    :return:
+    """
     for f in backup_functions:
         f()
 
 
 def register(observer):
+    """
+    Registers backup functions
+    :param observer: backup function to register
+    :return:
+    """
     backup_functions.append(observer)
 
 
 def unregister(observer):
+    """
+    Unregisters backup functions
+    :param observer: backup function to unregister
+    :return:
+    """
     backup_functions.remove(observer)
 
 
@@ -68,6 +82,11 @@ sear_pickle.write = functools.partial(sear_pickle.write, obj=model.England)
 
 
 def configure():
+    """
+    Configures program on startup with config.ini
+    restores model and registers backup functions
+    :return:
+    """
     config.read("../config.ini")
     restore_from = config.get("Restore", "from")
     if restore_from == "yaml":
